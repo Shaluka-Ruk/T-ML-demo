@@ -304,7 +304,7 @@ def server(input, output, session):
         _, _, m_inc, m_pmt, dti = process_application()
         df = pd.DataFrame({
             "Financial Metric": ["Est. Monthly Income", "Est. New Loan Payment", "Total Debt-to-Income Ratio"],
-            "Calculated Value": [f"${m_inc:,.2f}", f"${m_pmt:,.2f}", f"{dti:.1f}%"]
+            "Calculated Value": [f"Rs{m_inc:,.2f}", f"Rs{m_pmt:,.2f}", f"{dti:.1f}%"]
         })
         return render.DataGrid(df, width="100%")
 
