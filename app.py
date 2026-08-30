@@ -81,15 +81,23 @@ app_ui = ui.page_navbar(
     
     ui.nav_panel("Model Improvements",
         ui.card(
-            ui.h4("Machine Learning Pipeline Audit"),
+            ui.h4("Why HistGradientBoostingClassifier Best Suits Loan Prediction"),
             ui.markdown("""
-            * **Dynamic Imputation:** Leverages `KNNImputer` to mathematically predict missing historical variables (e.g., Job Tenure, Checking Balance) in real-time, streamlining the user experience without sacrificing model accuracy.
-            * **Data Balancing (SMOTE):** Addressed minority target class distribution to prevent Accuracy Paradox.
-            * **Cross-Validation (CV):** Implemented randomized grid search with 3-fold cross-validation.
-            * **Explicit Feature Preprocessing:** Separated imputation, scaling, and encoding to strictly prevent data leakage.
+            * **Captures Non-Linear Risk Interactions:** Loan default risk depends on interacting factors (e.g. high income but poor credit history, or low DTI but a bankruptcy record). Gradient-boosted decision trees split on these interactions directly, whereas a linear model like Logistic Regression would miss them unless every interaction term was hand-engineered.
+            * **Built for Tabular, Mixed-Type Financial Data:** The dataset mixes continuous numeric fields (income, credit score, DTI) with categorical fields (education, home ownership, loan purpose). Histogram-based boosting bins continuous features internally, giving it the speed of a simple model with the accuracy of a complex one on exactly this kind of tabular data.
+            * **Resilient to Outliers and Skewed Distributions:** Financial fields like net worth or liabilities can have extreme outliers. Tree-based splits are based on relative ordering, not raw magnitude, so a few extreme applicants don't distort the decision boundary the way they would in a distance- or gradient-magnitude-sensitive model.
+            * **Pairs Well with SMOTE Balancing:** Loan approval datasets are typically imbalanced (far fewer rejections/defaults than approvals). Balancing the classes with `SMOTE` before training lets the boosted trees learn a genuine decision boundary for the minority class instead of defaulting to the majority class, avoiding the Accuracy Paradox.
+            * **Robust to Missing Data After Imputation:** Optional applicant fields (job tenure, checking balance, etc.) are frequently blank. `KNNImputer` fills these using the most similar applicants, and boosting is tolerant of the resulting estimated values since it splits on thresholds rather than relying on exact precision.
+            * **Prevents Data Leakage by Design:** Imputation, scaling, and encoding are fit once on training data and reused as fixed artifacts at inference time, so the model's real-world accuracy reflects its true generalization performance rather than information leaked from the test set.
             """)
         )
     ),
+    header=ui.tags.style("""
+        body, .navbar, .nav-link, .btn, input, select, textarea,
+        h1, h2, h3, h4, h5, h6, p, span, div, label {
+            font-family: 'Times New Roman', Times, serif !important;
+        }
+    """),
     title="Intelligent Loan Decision Engine",
     fillable=True,
 )
