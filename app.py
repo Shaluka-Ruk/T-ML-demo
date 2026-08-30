@@ -97,6 +97,59 @@ app_ui = ui.page_navbar(
         h1, h2, h3, h4, h5, h6, p, span, div, label {
             font-family: 'Times New Roman', Times, serif !important;
         }
+
+        body {
+            background: linear-gradient(135deg, #eef2f7 0%, #dbe4f0 100%) fixed;
+            color: #1f2b3d;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: #1f2b3d !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+        .navbar .nav-link, .navbar-brand, .navbar .navbar-text {
+            color: #f5f7fa !important;
+        }
+        .navbar .nav-link:hover {
+            color: #9fc0ff !important;
+        }
+
+        [class*="sidebar"] {
+            background-color: #f8f9fb !important;
+            border-right: 1px solid #dde3ea;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+        }
+
+        .accordion-button {
+            background-color: #f1f4f9;
+            color: #1f2b3d;
+        }
+        .accordion-button:not(.collapsed) {
+            background-color: #e3ebfa;
+            color: #1f2b3d;
+        }
+
+        .form-control, .form-select {
+            background-color: #ffffff;
+            border: 1px solid #cfd7e3;
+            color: #1f2b3d;
+        }
+
+        .value-box {
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .table, .dataframe, .shiny-data-grid {
+            background-color: #ffffff;
+        }
     """),
     title="Intelligent Loan Decision Engine",
     fillable=True,
